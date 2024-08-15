@@ -1,0 +1,310 @@
+{
+	"info": {
+		"_postman_id": "e7b1f92c-a7b5-455f-83b6-c977ddb6a89f",
+		"name": "Companies",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "37360445"
+	},
+	"item": [
+		{
+			"name": "endpoint-tests",
+			"item": [
+				{
+					"name": "get_all_companies",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/companies/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"companies",
+								""
+							]
+						},
+						"description": "retrieve all companies within the microservice"
+					},
+					"response": []
+				},
+				{
+					"name": "get_company_by_id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/companies/5063114bd386d8fadbd6b004",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"companies",
+								"5063114bd386d8fadbd6b004"
+							]
+						},
+						"description": "retrieve a single company within the microservice by id"
+					},
+					"response": []
+				},
+				{
+					"name": "get_companies_by_pages",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/companies/paged/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"companies",
+								"paged",
+								"1"
+							]
+						},
+						"description": "retrieve 20 comapnies at a time, page 1 is 1-20, page 2 is 21-40, etc..."
+					},
+					"response": []
+				},
+				{
+					"name": "create_company",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Tech Innovations Inc.\",\n  \"industry\": \"Technology\",\n  \"catchPhrase\": \"Innovating the Future\",\n  \"url\": \"https://www.techinnovations.com\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/companies",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"companies"
+							]
+						},
+						"description": "adds a company and returns that company if successful."
+					},
+					"response": []
+				},
+				{
+					"name": "update_company_by_id",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Smart Arm Factories\",\n    \"industry\": \"Robotics\",\n    \"catchPhrase\": \"Not just any arm. A smart arm.\",\n    \"url\": \"www.smartarm.org\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/companies/update/5063114bd386d8fadbd6b004",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"companies",
+								"update",
+								"5063114bd386d8fadbd6b004"
+							]
+						},
+						"description": "update a companies information by id"
+					},
+					"response": []
+				},
+				{
+					"name": "delete_company_by_id",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/companies/5063114bd386d8fadbd6b004",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"companies",
+								"5063114bd386d8fadbd6b004"
+							]
+						},
+						"description": "delete a company from the microservice"
+					},
+					"response": []
+				}
+			],
+			"description": "Positive CRUD Operations for each endpoint for my microservice."
+		},
+		{
+			"name": "negative-tests",
+			"item": [
+				{
+					"name": "get_all_companies_404",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/companies",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"companies"
+							]
+						},
+						"description": "return a 404 not found if there are no companies"
+					},
+					"response": []
+				},
+				{
+					"name": "get_companies_by_pages_404",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/companies/paged/10000",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"companies",
+								"paged",
+								"10000"
+							]
+						},
+						"description": "return a 404 not found for pages requested that are out of bounds"
+					},
+					"response": []
+				},
+				{
+					"name": "get_company_by_id_404",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/companies/507f191e810c19729de860ea",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"companies",
+								"507f191e810c19729de860ea"
+							]
+						},
+						"description": "return a 404 error for unrecognizable id"
+					},
+					"response": []
+				},
+				{
+					"name": "delete_company_by_id_404",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/companies/507f191e810c19729de860ea",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"companies",
+								"507f191e810c19729de860ea"
+							]
+						},
+						"description": "return a 404 error for unrecognizable id"
+					},
+					"response": []
+				},
+				{
+					"name": "update_company_by_id_404",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Smart Arm Factories\",\n    \"industry\": \"Robotics\",\n    \"catchPhrase\": \"Not just any arm. A smart arm.\",\n    \"url\": \"www.smartarm.org\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/companies/update/507f191e810c19729de860ea",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"companies",
+								"update",
+								"507f191e810c19729de860ea"
+							]
+						},
+						"description": "return a 404 error for unrecognizable id"
+					},
+					"response": []
+				},
+				{
+					"name": "create_company_409",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Tech Innovations Inc.\",\n  \"industry\": \"Technology\",\n  \"catchPhrase\": \"Innovating the Future\",\n  \"url\": \"https://www.techinnovations.com\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/companies",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"companies"
+							]
+						},
+						"description": "return 409 conflict error if company already exisits (name, industry or catchPhrase)"
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
